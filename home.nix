@@ -1,11 +1,15 @@
 {pkgs, ...}: {
+  imports = [
+    ./languages
+    ./programs/nixvim/nixvim.nix
+  ];
+
   home.stateVersion = "24.11";
   home.shell.enableFishIntegration = true;
 
   catppuccin = {
     flavor = "mocha";
     enable = true;
-    nvim.enable = false;
   };
 
   programs = {
@@ -28,9 +32,7 @@
       enable = true;
       shellInit = ''
         set fish_greeting
-        ~/.local/bin/mise activate fish | source
         source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-        fish_add_path --prepend --global ~/.ghcup/bin
         set -gx MANPAGER "nvim -c 'Man!'"
         set -gx MANWIDTH 999
       '';
@@ -52,11 +54,6 @@
     home-manager.enable = true;
 
     lazygit.enable = true;
-
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
 
     opam = {
       enable = true;
@@ -92,28 +89,30 @@
 
   home.packages = with pkgs; [
     alejandra
+    cabal-install
     cachix
+    cargo
     cmake
     coreutils
     curl
     #cvc4
     eprover
     ffmpeg
+    ghc
     gnupatch
     imagemagick
     jq
-    lua51Packages.lua-lsp
-    lua51Packages.luarocks
+    ltex-ls-plus
     marksman
     nil
     nixfmt-rfc-style
     nh
     ruby
+    rustc
+    rustfmt
     sketchybar
     stylua
     tinymist
-    texlab
-    texlive.combined.scheme-full
     typst
     vampire
     z3-tptp

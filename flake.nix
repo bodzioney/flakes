@@ -4,16 +4,22 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     catppuccin.url = "github:catppuccin/nix";
+
     darwin = {
-      # Manage darwin systems
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
-      # Manage per-user config globally
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nh = {
       url = "github:viperML/nh";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +32,7 @@
     darwin,
     home-manager,
     nh,
+    nixvim,
     nixpkgs,
     ...
   } @ inputs: let
@@ -55,6 +62,7 @@
             home-manager.users.ethan = {
               imports = [
                 ./home.nix
+                nixvim.homeManagerModules.nixvim
                 catppuccin.homeModules.catppuccin
               ];
             };
