@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./languages
-    ./programs/nixvim/nixvim.nix
+    ./programs
   ];
 
   home.stateVersion = "24.11";
@@ -10,6 +10,7 @@
   catppuccin = {
     flavor = "mocha";
     enable = true;
+    mako.enable = false;
   };
 
   programs = {
@@ -37,7 +38,8 @@
         set -gx MANWIDTH 999
       '';
       shellAbbrs = {
-        rebuild = "nh darwin switch ~/.config/nix -u";
+        rbld = "nh darwin switch ~/.config/nix";
+        upgd = "nh darwin switch ~/.config/nix -u";
       };
     };
 
@@ -48,8 +50,14 @@
 
     git = {
       enable = true;
+      extraConfig.init.defaultBranch = "main";
       lfs.enable = true;
+      aliases = {
+        root = "rev-parse --show-toplevel";
+      };
     };
+
+    helix.enable = true;
 
     home-manager.enable = true;
 
@@ -85,34 +93,29 @@
         bind h split-window -v -c "#{pane_current_path}"
       '';
     };
+
+    zoxide = {
+      enable = true;
+      options = ["--cmd cd"];
+    };
   };
 
   home.packages = with pkgs; [
-    alejandra
-    cabal-install
-    cachix
-    cargo
     cmake
     coreutils
     curl
     #cvc4
     eprover
     ffmpeg
-    ghc
+    gh
     gnupatch
     imagemagick
     jq
-    ltex-ls-plus
     marksman
-    nil
-    nixfmt-rfc-style
-    nh
-    ruby
-    rustc
-    rustfmt
-    sketchybar
-    stylua
+    mas
+    # racket-minimal
     tinymist
+    treefmt
     typst
     vampire
     z3-tptp

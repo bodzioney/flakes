@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./coq.nix
-    ./tex.nix
+    ./nixvim
+    ./sketchybar
   ];
 }

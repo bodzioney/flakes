@@ -2,8 +2,12 @@
   description = "Nix-darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    catppuccin.url = "github:catppuccin/nix";
+    nixpkgs.url = "git+https://github.com/NixOS/nixpkgs?shallow=1&ref=nixpkgs-unstable";
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -47,7 +51,7 @@
         specialArgs = {inherit inputs;};
 
         modules = [
-          ./configuration.nix
+          ./modules/darwin
           home-manager.darwinModules.home-manager
           {
             nixpkgs = {
@@ -61,7 +65,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.ethan = {
               imports = [
-                ./home.nix
+                ./modules/home
                 nixvim.homeManagerModules.nixvim
                 catppuccin.homeModules.catppuccin
               ];

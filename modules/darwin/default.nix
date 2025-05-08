@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./brew.nix
+    ./programs
   ];
 
   programs.fish = {
@@ -15,7 +16,8 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   environment = {
-    shells = [pkgs.fish]; # Default shell
+    # Default shell
+    shells = [pkgs.fish];
     variables = {
       # System variables
       SHELL = "${pkgs.fish}/bin/fish";
@@ -30,10 +32,6 @@
       "/opt/homebrew/bin"
       "/opt/homebrew/sbin"
     ];
-  };
-
-  services = {
-    aerospace = import ./programs/aerospace.nix;
   };
 
   nix.extraOptions = ''
@@ -61,9 +59,13 @@
     ];
     trusted-public-keys = [
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
     substituters = [
+      "https://cachix.cachix.org"
       "https://cache.iog.io"
+      "https://nix-community.cachix.org"
     ];
   };
 

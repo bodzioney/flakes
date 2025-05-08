@@ -7,40 +7,13 @@
     };
 
     plugins = {
-      cmp-nvim-lsp.enable = true;
-
       fidget.enable = true;
 
       lsp = {
         enable = true;
-
         servers = {
           bashls.enable = true;
           clangd.enable = true;
-          hls = {
-            enable = true;
-            installGhc = false;
-            extraOptions = {
-              filetypes = [
-                "haskell"
-                "lhaskell"
-                "cabal"
-              ];
-            };
-          };
-          lua_ls = {
-            enable = true;
-            settings = {
-              completion = {
-                callSnippet = "Replace";
-              };
-            };
-          };
-          ltex_plus = {
-            enable = true;
-            package = null;
-          };
-          nil_ls.enable = true;
           ocamllsp.enable = true;
           pylsp.enable = true;
           racket_langserver = {
@@ -48,14 +21,7 @@
             package = null;
             rootMarkers = ["vim.fn.getcwd()"];
           };
-          rust_analyzer = {
-            enable = true;
-            installRustc = false;
-            installCargo = false;
-            installRustfmt = false;
-          };
         };
-
         keymaps = {
           # Diagnostic keymaps
           diagnostic = {

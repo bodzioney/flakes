@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./cmp.nix
+    ./completion.nix
     ./conform.nix
     ./editor.nix
     ./keys.nix

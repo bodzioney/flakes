@@ -1,10 +1,5 @@
-{pkgs, ...}: {
+{...}: {
   programs.nixvim = {
-    extraPackages = with pkgs; [
-      # Used to format Lua code
-      stylua
-    ];
-
     plugins.conform-nvim = {
       enable = true;
       settings = {
@@ -22,6 +17,7 @@
           lua = ["stylua"];
           nix = ["alejandra"];
           rust = ["rustfmt"];
+          tex = ["tex-fmt"];
         };
       };
     };
