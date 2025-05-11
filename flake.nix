@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lix = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +40,7 @@
     catppuccin,
     darwin,
     home-manager,
+    lix,
     nh,
     nixvim,
     nixpkgs,
@@ -52,6 +58,7 @@
 
         modules = [
           ./modules/darwin
+          lix.nixosModules.default
           home-manager.darwinModules.home-manager
           {
             nixpkgs = {

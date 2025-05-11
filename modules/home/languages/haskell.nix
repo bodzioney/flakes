@@ -1,18 +1,26 @@
 {pkgs, ...}: {
-  programs.nixvim.plugins.lsp.servers.hls = {
-    # Enable if language server is found
-    enable = pkgs ? haskell-language-server;
-    package = null;
-    installGhc = false;
-    extraOptions = {
-      filetypes = [
-        "haskell"
-        "lhaskell"
-        "cabal"
-      ];
-      settings = {
-        haskell = {
-          formattingProvider = "fourmolu";
+  home.packages = with pkgs; [
+    cabal-install
+    ghc
+    haskell-language-server
+    fourmolu
+  ];
+
+  programs.nixvim.plugins.lsp.servers = {
+    hls = {
+      enable = true;
+      package = null;
+      installGhc = false;
+      extraOptions = {
+        filetypes = [
+          "haskell"
+          "lhaskell"
+          "cabal"
+        ];
+        settings = {
+          haskell = {
+            formattingProvider = "fourmolu";
+          };
         };
       };
     };

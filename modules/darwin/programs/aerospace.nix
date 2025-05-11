@@ -31,7 +31,7 @@ in {
         inner.horizontal = 6;
         inner.vertical = 6;
         outer.left = 6;
-        outer.bottom = 6;
+        outer.bottom = 45;
         outer.top = 6;
         outer.right = 6;
       };
