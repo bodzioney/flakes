@@ -3,6 +3,7 @@
     ltex-ls-plus
     tex-fmt
     texlive.combined.scheme-full
+    texpresso
   ];
 
   programs.nixvim.plugins = {
@@ -13,6 +14,7 @@
       #  package = null;
       #};
     };
+    texpresso.enable = true;
     vimtex = {
       enable = true;
       texlivePackage = null;

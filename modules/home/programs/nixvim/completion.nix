@@ -15,10 +15,6 @@
           short_name = "nLUA";
           src = "nvimlua";
         }
-        {
-          short_name = "vTEX";
-          src = "vimtex";
-        }
       ];
     };
   };

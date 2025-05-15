@@ -120,6 +120,4 @@
     vampire
     z3-tptp
   ];
-
-  nix.enable = true;
 }
