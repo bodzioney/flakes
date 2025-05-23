@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +44,7 @@
     self,
     catppuccin,
     darwin,
+    emacs,
     home-manager,
     lix,
     nh,
@@ -65,6 +71,7 @@
               inherit (nixpkgsConfig) config;
               overlays = [
                 nh.overlays.default
+                emacs.overlays.default
               ];
             };
 

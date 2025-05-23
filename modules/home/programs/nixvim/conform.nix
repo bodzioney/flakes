@@ -1,4 +1,8 @@
-{...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = true;
@@ -21,6 +25,19 @@
           nix = ["alejandra"];
           rust = ["rustfmt"];
           tex = ["tex-fmt"];
+        };
+        formatters = {
+          stylua = {
+            command = lib.getExe pkgs.stylua;
+            args = [
+              "--search-parent-directories"
+              "--indent-type"
+              "Spaces"
+              "--stdin-filepath"
+              "$FILENAME"
+              "-"
+            ];
+          };
         };
       };
     };

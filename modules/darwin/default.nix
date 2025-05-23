@@ -38,40 +38,50 @@
     ];
   };
 
-  nix.extraOptions = ''
-    auto-optimise-store = true
-    experimental-features = nix-command flakes
-    extra-platforms = x86_64-darwin aarch64-darwin
-  '';
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.hack
+      nerd-fonts.monaspace
+      jetbrains-mono
+    ];
+  };
 
-  nix.optimise.automatic = true;
+  nix = {
+    extraOptions = ''
+      auto-optimise-store = true
+      experimental-features = nix-command flakes
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
 
-  nix.gc = {
-    automatic = true;
-    interval = {
-      Weekday = 0;
-      Hour = 0;
-      Minute = 0;
+    optimise.automatic = true;
+
+    gc = {
+      automatic = true;
+      interval = {
+        Weekday = 0;
+        Hour = 0;
+        Minute = 0;
+      };
+      options = "--delete-older-than 30d";
     };
-    options = "--delete-older-than 30d";
-  };
 
-  nix.settings = {
-    trusted-users = [
-      "root"
-      "ethan"
-    ];
-    trusted-public-keys = [
-      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-    substituters = [
-      "https://cachix.cachix.org"
-      "https://cache.iog.io"
-      "https://nix-community.cachix.org"
-    ];
+    settings = {
+      trusted-users = [
+        "root"
+        "ethan"
+      ];
+      trusted-public-keys = [
+        "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      substituters = [
+        "https://cachix.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
+    };
   };
-
-  system.stateVersion = 6;
+  system = {
+    primaryUser = "ethan";
+    stateVersion = 6;
+  };
 }

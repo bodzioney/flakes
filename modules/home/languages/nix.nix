@@ -7,6 +7,7 @@
     nixfmt-rfc-style
     nixpkgs-review
     nh
+    nurl
   ];
 
   programs.nixvim.plugins.lsp.servers.nil_ls = {

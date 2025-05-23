@@ -28,10 +28,19 @@
         key = "<Esc>";
         action = "<cmd>nohlsearch<CR>";
       }
+      # Diagnostics Menu
+      {
+        mode = "n";
+        key = "<leader>q";
+        action.__raw = "vim.diagnostic.setloclist";
+        options = {
+          desc = "Open diagnostic [Q]uickfix list";
+        };
+      }
     ];
 
     autoGroups = {
-      kickstart-highlight-yank = {
+      highlight-yank = {
         clear = true;
       };
     };
@@ -41,7 +50,7 @@
       {
         event = ["TextYankPost"];
         desc = "Highlight when yanking (copying) text";
-        group = "kickstart-highlight-yank";
+        group = "highlight-yank";
         callback.__raw = ''
           function()
             vim.highlight.on_yank()

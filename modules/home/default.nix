@@ -4,8 +4,12 @@
     ./programs
   ];
 
-  home.stateVersion = "24.11";
-  home.shell.enableFishIntegration = true;
+  home = {
+    stateVersion = "24.11";
+    shell.enableFishIntegration = true;
+  };
+
+  xdg.enable = true;
 
   catppuccin = {
     flavor = "mocha";
@@ -23,9 +27,15 @@
       nix-direnv.enable = true;
     };
 
-    eza = {
+    emacs = {
       enable = true;
+      package = (pkgs.emacsPackagesFor pkgs.emacs-macport).emacsWithPackages (epkgs: [
+        epkgs.treesit-grammars.with-all-grammars
+        epkgs.vterm
+      ]);
     };
+
+    eza.enable = true;
 
     fd.enable = true;
 
@@ -34,8 +44,10 @@
       shellInit = ''
         set fish_greeting
         source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-        set -gx MANPAGER "nvim -c 'Man!'"
-        set -gx MANWIDTH 999
+        fish_add_path ~/.config/emacs/bin
+        set -g fish_key_bindings fish_vi_key_bindings
+
+        set -gx MANPAGER "sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
       '';
       shellAbbrs = {
         rbld = "nh darwin switch ~/.config/nix";
@@ -63,12 +75,14 @@
 
     lazygit.enable = true;
 
-    opam = {
+    opam.enable = true;
+    pandoc.enable = true;
+    ripgrep.enable = true;
+
+    spotify-player = {
       enable = true;
     };
 
-    pandoc.enable = true;
-    ripgrep.enable = true;
     starship.enable = true;
 
     tmux = {
@@ -77,7 +91,7 @@
       focusEvents = true;
       keyMode = "vi";
       mouse = true;
-      terminal = "screen-256color";
+      terminal = "tmux-256color";
       shortcut = "Space";
       plugins = with pkgs.tmuxPlugins; [
         better-mouse-mode
@@ -91,6 +105,10 @@
         unbind '"'
         bind v split-window -h -c "#{pane_current_path}"
         bind h split-window -v -c "#{pane_current_path}"
+
+        set -g allow-passthrough on
+        set -ga update-environment TERM
+        set -ga update-environment TERM_PROGRAM
       '';
     };
 
@@ -107,13 +125,17 @@
     #cvc4
     eprover
     ffmpeg
+    fontconfig
     gh
     gnupatch
     imagemagick
     jq
     marksman
     mas
-    # racket-minimal
+    racket-minimal
+    shellcheck
+    shfmt
+    spotify-player
     tinymist
     treefmt
     typst

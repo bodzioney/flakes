@@ -1,7 +1,7 @@
 {...}: {
   programs.nixvim = {
     autoGroups = {
-      "kickstart-lsp-attach" = {
+      "lsp-attach" = {
         clear = true;
       };
     };
@@ -23,15 +23,6 @@
           };
         };
         keymaps = {
-          # Diagnostic keymaps
-          diagnostic = {
-            "<leader>q" = {
-              mode = "n";
-              action = "setloclist";
-              desc = "Open diagnostic [Q]uickfix list";
-            };
-          };
-
           extra = [
             # Jump to the definition of the word under your cusor.
             #  This is where a variable was first declared, or where a function is defined, etc.
@@ -131,7 +122,7 @@
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-            local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+            local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = bufnr,
               group = highlight_augroup,
@@ -145,10 +136,10 @@
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+              group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
               end,
             })
           end

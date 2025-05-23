@@ -4,6 +4,7 @@
     ./conform.nix
     ./editor.nix
     ./keys.nix
+    ./lint.nix
     ./lsp.nix
     ./ui.nix
   ];
@@ -97,6 +98,7 @@
       settings.flavour = "mocha";
     };
 
+    luaLoader.enable = true;
     performance.byteCompileLua.enable = true;
   };
 }
