@@ -4,6 +4,7 @@
     ghc
     haskell-language-server
     fourmolu
+    haskellPackages.hoogle
   ];
 
   programs.nixvim.plugins.lsp.servers = {

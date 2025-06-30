@@ -1,0 +1,19 @@
+[emacs-plus]
+src.git = "https://github.com/d12frosted/homebrew-emacs-plus"
+src.branch = "master"
+fetch.github = "d12frosted/homebrew-emacs-plus"
+
+[sbarlua]
+src.git = "https://github.com/FelixKratz/SbarLua"
+src.branch = "main"
+fetch.github = "FelixKratz/SbarLua"
+
+[blink-cmp-latex]
+src.git = "https://github.com/erooke/blink-cmp-latex"
+src.branch = "main"
+fetch.github = "erooke/blink-cmp-latex"
+
+[ott-vim]
+src.git = "https://github.com/tsung-ju/ott-vim"
+src.branch = "master"
+fetch.github = "tsung-ju/ott-vim"

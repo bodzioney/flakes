@@ -8,25 +8,44 @@ _: {
       cleanup = "uninstall";
     };
 
+    taps = [
+      "d12frosted/emacs-plus"
+    ];
+
     brews = [
+      {
+        name = "emacs-plus";
+        args = [
+          "with-no-frame-refocus"
+          "with-savchenkovaleriy-big-sur-curvy-3d-icon"
+        ];
+        link = true;
+      }
       "gmp"
       "pkgconf"
     ];
 
     casks = [
       "appcleaner"
+      "blockblock"
       "discord"
       "element"
       "espanso"
       "firefox"
-      "iterm2"
+      "iina"
+      "imazing"
       "ghostty"
-      "mullvadvpn"
+      "knockknock"
+      "lulu"
+      "mullvad-vpn"
       "obs"
       "orbstack"
+      "oversight"
       "raycast"
+      "thorium"
       "transmission"
       "tunnelblick"
+      "karabiner-elements"
       "zoom"
       "zotero"
       "zulip"

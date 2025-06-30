@@ -23,6 +23,28 @@ in {
         "exec-and-forget ${sketchybar} --trigger aerospace_focus_change"
       ];
 
+      on-window-detected = [
+        {
+          "if".app-name-regex-substring = "lulu|blockblock";
+          run = ["layout floating"];
+        }
+        {
+          "if".app-name-regex-substring = "code|emacs|ghostty";
+          run = ["move-node-to-workspace --focus-follows-window 1"];
+        }
+        {
+          "if".app-name-regex-substring = "firefox";
+          run = ["move-node-to-workspace --focus-follows-window 2"];
+        }
+        {
+          "if".app-name-regex-substring = "calendar|todoist|outlook";
+          run = ["move-node-to-workspace 3"];
+        }
+        {
+          "if".app-name-regex-substring = "discord|element|zulip|slack";
+          run = ["move-node-to-workspace 4"];
+        }
+      ];
       key-mapping = {
         preset = "qwerty";
       };

@@ -1,15 +1,7 @@
 {pkgs, ...}: {
   programs.nixvim = {
     extraPlugins = [
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "blink-cmp-latex";
-        src = pkgs.fetchFromGitHub {
-          owner = "erooke";
-          repo = "blink-cmp-latex";
-          rev = "cda18f0245e9e3daf0b3b42af91b23f8de997d5d";
-          hash = "sha256-tUFhYdP3+Hk11bR95ueynbBTSQ2lumlRR5TzH7KsIl8=";
-        };
-      })
+      pkgs.vimPlugins.blink-cmp-latex
     ];
     plugins = {
       blink-ripgrep.enable = true;
@@ -46,10 +38,9 @@
               "snippets"
               "buffer"
               "ripgrep"
-              # "latex"
+              "latex"
             ];
             providers = {
-              /*
               latex = {
                 name = "Latex";
                 module = "blink-cmp-latex";
@@ -57,7 +48,6 @@
                   insert_command = false;
                 };
               };
-              */
               ripgrep = {
                 async = true;
                 module = "blink-ripgrep";

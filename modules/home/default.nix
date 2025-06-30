@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./languages
     ./programs
@@ -27,14 +31,6 @@
       nix-direnv.enable = true;
     };
 
-    emacs = {
-      enable = true;
-      package = (pkgs.emacsPackagesFor pkgs.emacs-macport).emacsWithPackages (epkgs: [
-        epkgs.treesit-grammars.with-all-grammars
-        epkgs.vterm
-      ]);
-    };
-
     eza.enable = true;
 
     fd.enable = true;
@@ -44,14 +40,13 @@
       shellInit = ''
         set fish_greeting
         source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-        fish_add_path ~/.config/emacs/bin
         set -g fish_key_bindings fish_vi_key_bindings
 
         set -gx MANPAGER "sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
       '';
       shellAbbrs = {
-        rbld = "nh darwin switch ~/.config/nix";
-        upgd = "nh darwin switch ~/.config/nix -u";
+        nrb = "nh darwin switch ~/.config/nix";
+        nup = "nh darwin switch ~/.config/nix -u";
       };
     };
 
@@ -69,7 +64,37 @@
       };
     };
 
-    helix.enable = true;
+    helix = {
+      enable = true;
+      settings = {
+        editor = {
+          auto-format = true;
+          auto-completion = true;
+          bufferline = "multiple";
+          color-modes = true;
+          line-number = "relative";
+          lsp = {
+            display-messages = true;
+            display-inlay-hints = true;
+            display-signature-help-docs = true;
+          };
+        };
+      };
+
+      languages = {
+        language = [
+          {
+            name = "rust";
+            auto-format = true;
+          }
+          {
+            name = "nix";
+            auto-format = true;
+            formatter.command = lib.getExe pkgs.alejandra;
+          }
+        ];
+      };
+    };
 
     home-manager.enable = true;
 
@@ -78,6 +103,7 @@
     opam.enable = true;
     pandoc.enable = true;
     ripgrep.enable = true;
+    ripgrep-all.enable = true;
 
     spotify-player = {
       enable = true;
@@ -112,6 +138,17 @@
       '';
     };
 
+    yazi = {
+      enable = true;
+    };
+
+    zellij = {
+      enable = true;
+      settings = {
+        theme = "catppuccin-mocha";
+      };
+    };
+
     zoxide = {
       enable = true;
       options = ["--cmd cd"];
@@ -119,6 +156,7 @@
   };
 
   home.packages = with pkgs; [
+    clamav
     cmake
     coreutils
     curl
@@ -128,10 +166,12 @@
     fontconfig
     gh
     gnupatch
+    haskellPackages.nvfetcher
     imagemagick
     jq
     marksman
     mas
+    obsidian
     racket-minimal
     shellcheck
     shfmt
@@ -140,6 +180,8 @@
     treefmt
     typst
     vampire
+    wiki-tui
+    yt-dlp
     z3-tptp
   ];
 }

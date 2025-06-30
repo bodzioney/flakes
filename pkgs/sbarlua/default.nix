@@ -2,18 +2,10 @@
   pkgs,
   lib,
   stdenv,
-  fetchFromGitHub,
+  source,
 }:
 stdenv.mkDerivation {
-  pname = "sbarlua";
-  version = "437bd2031da38ccda75827cb7548e7baa4aa9978";
-  src = fetchFromGitHub {
-    owner = "FelixKratz";
-    repo = "SbarLua";
-    rev = "437bd2031da38ccda75827cb7548e7baa4aa9978";
-    fetchSubmodules = false;
-    sha256 = "sha256-F0UfNxHM389GhiPQ6/GFbeKQq5EvpiqQdvyf7ygzkPg=";
-  };
+  inherit (source) pname version src;
 
   buildInputs = with pkgs;
     [

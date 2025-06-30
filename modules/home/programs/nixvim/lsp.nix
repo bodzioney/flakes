@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.nixvim = {
     autoGroups = {
       "lsp-attach" = {
@@ -14,13 +14,22 @@
         servers = {
           bashls.enable = true;
           clangd.enable = true;
-          ocamllsp.enable = true;
+          ltex_plus = {
+            enable = true;
+            package = pkgs.ltex-ls-plus;
+            filetypes = ["tex" "markdown"];
+          };
+          ocamllsp = {
+            enable = true;
+            package = null;
+          };
           pylsp.enable = true;
           racket_langserver = {
             enable = true;
             package = null;
             rootMarkers = ["vim.fn.getcwd()"];
           };
+          tinymist.enable = true;
         };
         keymaps = {
           extra = [
