@@ -7,5 +7,6 @@
     ./rocq.nix
     ./rust.nix
     ./tex.nix
+    ./typst.nix
   ];
 }

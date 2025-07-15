@@ -17,7 +17,6 @@
           ltex_plus = {
             enable = true;
             package = pkgs.ltex-ls-plus;
-            filetypes = ["tex" "markdown"];
           };
           ocamllsp = {
             enable = true;
@@ -29,7 +28,6 @@
             package = null;
             rootMarkers = ["vim.fn.getcwd()"];
           };
-          tinymist.enable = true;
         };
         keymaps = {
           extra = [

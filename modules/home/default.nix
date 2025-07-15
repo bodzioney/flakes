@@ -161,17 +161,18 @@
     coreutils
     curl
     #cvc4
+    delta
     eprover
     ffmpeg
     fontconfig
     gh
+    glow
     gnupatch
     haskellPackages.nvfetcher
     imagemagick
     jq
     marksman
     mas
-    obsidian
     racket-minimal
     shellcheck
     shfmt
