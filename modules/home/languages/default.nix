@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./forester.nix
     ./haskell.nix
     ./lua.nix
     ./nix.nix

@@ -40,6 +40,7 @@ _: {
       "lulu"
       "mullvad-vpn"
       "obs"
+      "obsidian"
       "orbstack"
       "raycast"
       "spotify"

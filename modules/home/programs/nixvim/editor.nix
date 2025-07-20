@@ -87,6 +87,7 @@
       treesitter = {
         enable = true;
         settings = {
+          ensure_installed = ["forester"];
           highlight = {
             enable = true;
             # These don't play nice with treesitter
