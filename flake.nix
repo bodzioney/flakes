@@ -20,8 +20,14 @@
     };
 
     lix = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix.follows = "lix";
     };
 
     nixvim = {
@@ -46,6 +52,7 @@
     darwin,
     home-manager,
     lix,
+    lix-module,
     nh,
     nixvim,
     nvfetcher,
@@ -95,7 +102,7 @@
             };
           }
           ./modules/darwin
-          lix.nixosModules.default
+          lix-module.nixosModules.default
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -103,7 +110,7 @@
             home-manager.users.ethan = {
               imports = [
                 ./modules/home
-                nixvim.homeManagerModules.nixvim
+                nixvim.homeModules.nixvim
                 catppuccin.homeModules.catppuccin
               ];
             };

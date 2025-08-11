@@ -160,9 +160,8 @@
     cmake
     coreutils
     curl
-    #cvc4
     delta
-    eprover
+    duf
     ffmpeg
     fontconfig
     gh
@@ -174,15 +173,14 @@
     marksman
     mas
     racket-minimal
+    rlwrap # Beluga Dependency
     shellcheck
     shfmt
     spotify-player
     tinymist
     treefmt
     typst
-    vampire
     wiki-tui
     yt-dlp
-    z3-tptp
   ];
 }

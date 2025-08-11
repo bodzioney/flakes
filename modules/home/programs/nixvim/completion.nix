@@ -2,35 +2,54 @@
   programs.nixvim = {
     extraPlugins = [
       pkgs.vimPlugins.blink-cmp-latex
+      pkgs.vimPlugins.luasnip-latex-snippets-nvim
     ];
     plugins = {
       blink-ripgrep.enable = true;
+      luasnip.enable = true;
       blink-cmp = {
         enable = true;
         settings = {
-          keymap = {
-            "<C-e>" = [
-              "show"
-              "show_documentation"
-              "hide_documentation"
-            ];
-            "<C-x>" = [
-              "hide"
-              "fallback"
-            ];
-            "<CR>" = [
-              "accept"
-              "fallback"
-            ];
-            "<Tab>" = [
-              "select_next"
-              "fallback"
-            ];
-            "<S-Tab>" = [
-              "select_prev"
-              "fallback"
-            ];
+          completion = {
+            documentation = {
+              auto_show = true;
+              auto_show_delay_ms = 200;
+
+              window = {
+                border = "rounded";
+              };
+            };
+            ghost_text = {
+              enabled = true;
+            };
+
+            list = {
+              selection = {
+                auto_insert = true;
+                preselect = true;
+              };
+            };
+
+            trigger = {
+              show_on_accept_on_trigger_character = true;
+              show_on_keyword = true;
+              show_on_trigger_character = true;
+            };
           };
+          keymap = {
+            preset = "super-tab";
+          };
+          signature = {
+            enabled = true;
+
+            window = {
+              border = "rounded";
+            };
+          };
+          snippets = {
+            preset = "luasnip";
+          };
+
           sources = {
             default = [
               "lsp"
@@ -45,7 +64,7 @@
                 name = "Latex";
                 module = "blink-cmp-latex";
                 opts = {
-                  insert_command = false;
+                  insert_command = true;
                 };
               };
               ripgrep = {
